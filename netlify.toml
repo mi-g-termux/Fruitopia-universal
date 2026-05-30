@@ -17,3 +17,7 @@
   from = "/*"
   to   = "/index.html"
   status = 200
+[[redirects]]
+  from = "/api/sslcommerz/create-payment"
+  to = "/.netlify/functions/create-payment"
+  status = 200
