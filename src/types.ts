@@ -167,6 +167,11 @@ export interface SiteSettings {
   trademarkText: string;
   newsletterSectionIcon?: string; // SVG string or URL; defaults to built-in envelope icon
   testimonialSectionIcon?: string; // SVG string or URL; defaults to built-in star icon
+  // Editable section headings (admin-managed; live via Firestore siteSettings doc)
+  newsletterTitle?: string;       // e.g. "Newsletter Registration"
+  newsletterSubtitle?: string;    // e.g. "Stay updated with fresh recipes & exclusive coupons"
+  testimonialKicker?: string;     // small label above heading, e.g. "CLIENT LOVE & TESTIMONIALS"
+  testimonialTitle?: string;      // main heading, e.g. "Deliciously Recommended!"
   currency?: string;        // ISO code e.g. USD, BDT, EUR, GBP, INR
   currencySymbol?: string;  // Display symbol e.g. $, ৳, €, £, ₹
   currencyPosition?: 'before' | 'after'; // symbol before or after amount

@@ -76,10 +76,10 @@ export const Newsletter: React.FC = () => {
 
         <div className="text-center mb-8 mt-4">
           <h2 className="text-xl sm:text-2xl font-bold text-slate-800 uppercase tracking-wide">
-            Newsletter Registration
+            {siteSettings.newsletterTitle?.trim() || 'Newsletter Registration'}
           </h2>
           <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1.5">
-            Stay updated with fresh recipes &amp; exclusive coupons
+            {siteSettings.newsletterSubtitle?.trim() || 'Stay updated with fresh recipes & exclusive coupons'}
           </p>
         </div>
 

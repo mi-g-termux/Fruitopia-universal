@@ -1185,9 +1185,15 @@ const DEFAULT_ADMIN_ORDER_ALERT = `<!DOCTYPE html>
       if (!adminSettings?.googleSignInEnabled) {
         return { success: false, message: 'Google Sign-In is not enabled. Please contact the administrator.' };
       }
-      const { auth: firebaseAuth, isFirebaseConfigured: fbConfigured } = await import('../firebase');
+      // ✅ FIX: `isFirebaseConfigured` is a snapshot captured at module-load
+      // time (always false then). Wait for the async boot to finish, then
+      // read the LIVE flag via getIsFirebaseConfigured().
+      const fb = await import('../firebase');
+      await fb.firebaseBootPromise;
+      const firebaseAuth = fb.auth;
+      const fbConfigured = fb.getIsFirebaseConfigured();
       if (!fbConfigured || !firebaseAuth) {
-        return { success: false, message: 'Google Sign-In requires Firebase to be configured.' };
+        return { success: false, message: 'Google Sign-In requires Firebase to be configured. Open the Admin Panel → Firebase Setup and add your project credentials.' };
       }
       const { GoogleAuthProvider, signInWithPopup, fetchSignInMethodsForEmail, linkWithPopup } = await import('firebase/auth');
       const provider = new GoogleAuthProvider();

@@ -279,6 +279,10 @@ export const AdminPanel: React.FC = () => {
  const [socialTW, setSocialTW] = useState(siteSettings.socialTwitter ??'');
  const [newsletterIconUrl, setNewsletterIconUrl] = useState(siteSettings.newsletterSectionIcon ??'');
  const [testimonialIconUrl, setTestimonialIconUrl] = useState(siteSettings.testimonialSectionIcon ??'');
+ const [newsletterTitleVal, setNewsletterTitleVal] = useState(siteSettings.newsletterTitle ?? '');
+ const [newsletterSubtitleVal, setNewsletterSubtitleVal] = useState(siteSettings.newsletterSubtitle ?? '');
+ const [testimonialKickerVal, setTestimonialKickerVal] = useState(siteSettings.testimonialKicker ?? '');
+ const [testimonialTitleVal, setTestimonialTitleVal] = useState(siteSettings.testimonialTitle ?? '');
  const [faviconUrl, setFaviconUrl] = useState(siteSettings.faviconUrl ??'');
 
 
@@ -833,6 +837,10 @@ export const AdminPanel: React.FC = () => {
  socialTwitter: socialTW,
  newsletterSectionIcon: newsletterIconUrl,
  testimonialSectionIcon: testimonialIconUrl,
+ newsletterTitle: newsletterTitleVal,
+ newsletterSubtitle: newsletterSubtitleVal,
+ testimonialKicker: testimonialKickerVal,
+ testimonialTitle: testimonialTitleVal,
  faviconUrl: faviconUrl,
  currency: selectedCurrency,
  currencySymbol: customSymbol,
@@ -2036,7 +2044,37 @@ await saveSiteSettings(JSON.parse(JSON.stringify(current)));
  className="flex-1 bg-white border border-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-2.5 py-1.5 text-xs outline-none transition-all"
  /> {testimonialIconUrl && (
  <img src={testimonialIconUrl} alt="preview" className="w-8 h-8 object-contain rounded border border-slate-200 bg-white" onError={(e) => { (e.target as HTMLImageElement).style.display ='none'; }} /> )}
- </div> <button onClick={() => setTestimonialIconUrl('')} className="mt-1 text-[10px] text-slate-400 hover:text-rose-500 cursor-pointer">Reset to default</button> </div> </div> </div> {/* Favicon URL */}
+ </div> <button onClick={() => setTestimonialIconUrl('')} className="mt-1 text-[10px] text-slate-400 hover:text-rose-500 cursor-pointer">Reset to default</button> </div> </div> </div>
+ {/* SECTION HEADINGS — Newsletter & Testimonials editable copy */}
+ <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 space-y-3">
+   <h4 className="text-xs font-bold uppercase text-emerald-700 tracking-wider flex items-center gap-1.5">
+     <span>Section Headings</span>
+     <span className="bg-emerald-100 text-emerald-700 text-[9px] px-2 py-0.5 rounded-full font-bold">STOREFRONT</span>
+   </h4>
+   <p className="text-[10px] text-slate-500 font-medium">
+     Edit the headings shown on the Newsletter and Testimonials sections. Saved to Firebase — updates appear on every visitor's device (desktop & mobile) instantly.
+   </p>
+   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+     <div>
+       <label className="block text-[10px] font-bold uppercase text-slate-500 mb-1">Newsletter Title</label>
+       <input type="text" value={newsletterTitleVal} onChange={(e) => setNewsletterTitleVal(e.target.value)} placeholder="Newsletter Registration" className="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-2.5 py-1.5 text-xs outline-none" />
+     </div>
+     <div>
+       <label className="block text-[10px] font-bold uppercase text-slate-500 mb-1">Newsletter Subtitle</label>
+       <input type="text" value={newsletterSubtitleVal} onChange={(e) => setNewsletterSubtitleVal(e.target.value)} placeholder="Stay updated with fresh recipes & exclusive coupons" className="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-2.5 py-1.5 text-xs outline-none" />
+     </div>
+     <div>
+       <label className="block text-[10px] font-bold uppercase text-slate-500 mb-1">Testimonials Kicker (small label)</label>
+       <input type="text" value={testimonialKickerVal} onChange={(e) => setTestimonialKickerVal(e.target.value)} placeholder="CLIENT LOVE & TESTIMONIALS" className="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-2.5 py-1.5 text-xs outline-none" />
+     </div>
+     <div>
+       <label className="block text-[10px] font-bold uppercase text-slate-500 mb-1">Testimonials Title</label>
+       <input type="text" value={testimonialTitleVal} onChange={(e) => setTestimonialTitleVal(e.target.value)} placeholder="Deliciously Recommended!" className="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-2.5 py-1.5 text-xs outline-none" />
+     </div>
+   </div>
+   <p className="text-[9px] text-slate-400 font-medium">Leave blank to use the default text. Click <strong>Save Branding</strong> below to push the changes live.</p>
+ </div>
+ {/* Favicon URL */}
  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2"> <div> <label className="block text-[10px] font-extrabold text-slate-600 uppercase tracking-wider mb-0.5"> Browser Tab Favicon</label> <p className="text-[9px] text-slate-400 font-medium">Shown as the tiny icon in the browser tab. Paste a URL or base64 image.</p> <p className="text-[9px] text-violet-600 font-semibold mt-0.5"> Recommended size: <strong>32×32px</strong> (also works at 16×16px & 64×64px) — ICO, PNG, or SVG, transparent background.</p> </div> <div className="flex items-center gap-2"> <input
  type="text"
  value={faviconUrl}

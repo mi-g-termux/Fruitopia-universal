@@ -48,10 +48,10 @@ export const Testimonial: React.FC = () => {
         </div>
 
         <h3 className="text-emerald-600 text-xs sm:text-sm font-semibold tracking-widest uppercase mb-2">
-          CLIENT LOVE &amp; TESTIMONIALS
+          {siteSettings.testimonialKicker?.trim() || 'CLIENT LOVE & TESTIMONIALS'}
         </h3>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight uppercase mb-12">
-          Deliciously Recommended!
+          {siteSettings.testimonialTitle?.trim() || 'Deliciously Recommended!'}
         </h2>
 
         {featuredReviews.length === 0 ? (
