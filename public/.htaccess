@@ -1,0 +1,11 @@
+# cPanel / Apache — SPA fallback + proxy /api to Node app (if running on port 3005)
+RewriteEngine On
+
+# Proxy API + firebase-config to the Node.js app
+RewriteRule ^api/(.*)$              http://127.0.0.1:3005/api/$1 [P,L]
+RewriteRule ^firebase-config\.json$ http://127.0.0.1:3005/firebase-config.json [P,L]
+
+# SPA fallback — serve index.html for any non-file route
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
